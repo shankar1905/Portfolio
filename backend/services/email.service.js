@@ -1,65 +1,33 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.in",       // Zoho India SMTP
-  port: 587,                  // ✅ Best port for Render
-  secure: false,              // must be false for 587
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_PASS, // Zoho App Password
-  },
-  tls: {
-    rejectUnauthorized: false, // ✅ avoid TLS errors
-  },
-  connectionTimeout: 20000,   // ✅ avoid timeout
-  greetingTimeout: 20000,
-  socketTimeout: 20000,
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ✅ Verify SMTP
-transporter.verify((err, success) => {
-  if (err) {
-    console.log("❌ Zoho Email Error:", err.message);
-  } else {
-    console.log("✅ Zoho Email Ready");
-  }
-});
-
-// ✅ Admin Notification Email
+// Admin email
 async function sendContactEmail(name, email, message) {
-  return transporter.sendMail({
-    from: `"Shankar Portfolio" <${process.env.EMAIL}>`,
+  return resend.emails.send({
+    from: "Portfolio <onboarding@resend.dev>",
     to: process.env.EMAIL,
-    replyTo: email,
     subject: "📩 New Portfolio Message",
     html: `
-      <div style="font-family:Arial;padding:15px">
-        <h2>📩 New Contact Message</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Message:</b></p>
-        <div style="padding:10px;background:#f4f4f4;border-radius:5px;">
-          ${message}
-        </div>
-      </div>
+      <h3>New Contact Message</h3>
+      <p><b>Name:</b> ${name}</p>
+      <p><b>Email:</b> ${email}</p>
+      <p><b>Message:</b> ${message}</p>
     `,
   });
 }
 
-// ✅ Auto Reply Email to User
+// Auto reply
 async function sendAutoReplyEmail(name, email) {
-  return transporter.sendMail({
-    from: `"Shankar Portfolio" <${process.env.EMAIL}>`,
+  return resend.emails.send({
+    from: "Shankar Portfolio <onboarding@resend.dev>",
     to: email,
-    subject: "✅ Thanks for contacting me!",
+    subject: "Thanks for contacting me",
     html: `
-      <div style="font-family:Arial;padding:15px">
-        <h2>Hi ${name} 👋</h2>
-        <p>Thanks for contacting me.</p>
-        <p>I will reply to you soon 🚀</p>
-        <br>
-        <p>Regards,<br><b>Shankar Ganesh</b></p>
-      </div>
+      <h3>Hi ${name} 👋</h3>
+      <p>Thanks for your message. I will reply soon 🚀</p>
+      <br>
+      <b>Shankar Ganesh</b>
     `,
   });
 }
