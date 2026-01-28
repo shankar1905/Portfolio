@@ -27,5 +27,11 @@
         <a routerLink="/contact">Contact</a>
     </nav>
 
-    <button class="hire-btn">Hire Me</button>
+    <div class="header-actions">
+        <button class="theme-toggle" (click)="toggleTheme()" [title]="isLightMode ? 'Switch to Dark Mode' : 'Switch to Light Mode'">
+            <span [hidden]="isLightMode">☀️</span>
+            <span [hidden]="!isLightMode">🌙</span>
+        </button>
+        <button class="hire-btn">Hire Me</button>
+    </div>
 </header>

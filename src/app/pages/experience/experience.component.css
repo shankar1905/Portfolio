@@ -133,3 +133,29 @@
         transform: translateY(-4px) translateX(0);
     }
 }
+
+/* Light Mode Styles */
+body.light-mode .experience-section h2,
+body.light-mode .experience-section h3,
+body.light-mode .experience-section h4,
+body.light-mode .experience-section p {
+    color: #1d1d1f;
+}
+
+body.light-mode .timeline-content {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .timeline-content:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .timeline-content ul li {
+    color: #424245;
+}
+
+body.light-mode .timeline-date {
+    color: #ff0080;
+}

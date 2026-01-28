@@ -137,3 +137,25 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Light Mode Styles */
+body.light-mode .projects-section h2,
+body.light-mode .projects-section h3,
+body.light-mode .projects-section p {
+    color: #1d1d1f;
+}
+
+body.light-mode .project-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .project-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .tag {
+    background: rgba(255, 0, 128, 0.1);
+    color: #1d1d1f;
+}

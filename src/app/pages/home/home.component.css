@@ -228,3 +228,24 @@
         height: 240px;
     }
 }
+
+/* Light Mode Styles */
+::ng-deep body.light-mode .hero-text h1,
+::ng-deep body.light-mode .hero-text h2,
+::ng-deep body.light-mode .hero-text h3,
+::ng-deep body.light-mode .hero-text p {
+    color: #1d1d1f !important;
+}
+
+::ng-deep body.light-mode .hero-text h1 span {
+    background: linear-gradient(135deg, #ff0080, #b026ff, #00d4ff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+::ng-deep body.light-mode .btn-outline {
+    color: #1d1d1f !important;
+    background-image: linear-gradient(white, white), 
+                      linear-gradient(135deg, #00d4ff, #00ff88) !important;
+}
