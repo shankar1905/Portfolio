@@ -1,41 +1,38 @@
-const sgMail = require('@sendgrid/mail');
+const nodemailer = require("nodemailer");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: "smtp.zoho.in",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS, // Zoho app password
+  },
+});
 
-// ✅ Admin Email
+transporter.verify((err) => {
+  if (err) console.log("❌ Email Error:", err.message);
+  else console.log("✅ Zoho Email Ready");
+});
+
 async function sendContactEmail(name, email, message) {
-  const msg = {
+  return transporter.sendMail({
+    from: `"Portfolio" <${process.env.EMAIL}>`,
     to: process.env.EMAIL,
-    from: process.env.EMAIL,
     subject: "📩 New Portfolio Message",
-    html: `
-      <h2>New Contact Message</h2>
-      <p><b>Name:</b> ${name}</p>
-      <p><b>Email:</b> ${email}</p>
-      <p><b>Message:</b> ${message}</p>
-    `
-  };
-
-  await sgMail.send(msg);
-  console.log("✅ Admin Email Sent");
+    html: `<p><b>Name:</b> ${name}</p>
+           <p><b>Email:</b> ${email}</p>
+           <p><b>Message:</b> ${message}</p>`
+  });
 }
 
-// ✅ Auto Reply Email
 async function sendAutoReplyEmail(name, email) {
-  const msg = {
+  return transporter.sendMail({
+    from: `"Shankar Portfolio" <${process.env.EMAIL}>`,
     to: email,
-    from: process.env.EMAIL,
-    subject: "✅ Thanks for contacting me!",
-    html: `
-      <h3>Hi ${name}, 👋</h3>
-      <p>Thanks for contacting me. I will reply soon.</p>
-      <br>
-      <b>- Shankar Ganesh</b>
-    `
-  };
-
-  await sgMail.send(msg);
-  console.log("✅ Auto Reply Sent");
+    subject: "Thanks for contacting me",
+    html: `<h3>Hi ${name},</h3><p>Thanks for your message 😊</p>`
+  });
 }
 
 module.exports = { sendContactEmail, sendAutoReplyEmail };
