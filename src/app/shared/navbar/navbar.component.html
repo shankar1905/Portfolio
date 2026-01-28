@@ -1,0 +1,22 @@
+<nav class="navbar">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand">Shankar Ganesh</a>
+
+        <button class="navbar-toggler" (click)="toggleMenu()">
+            ☰
+        </button>
+
+        <ul class="navbar-nav" [class.show]="menuOpen">
+            <li class="nav-item"><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a routerLink="/about" routerLinkActive="active" class="nav-link">About</a></li>
+            <li class="nav-item"><a routerLink="/skills" routerLinkActive="active" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a routerLink="/projects" routerLinkActive="active" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a routerLink="/experience" routerLinkActive="active" class="nav-link">Experience</a></li>
+            <li class="nav-item"><a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a></li>
+            
+            <button class="btn" routerLink="/contact">
+                Hire Me
+            </button>
+        </ul>
+    </div>
+</nav>
