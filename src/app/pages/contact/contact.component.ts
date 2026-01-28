@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -22,7 +23,7 @@ export class ContactComponent {
       return;
     }
 
-    this.http.post('http://localhost:5001/api/contact', {
+    this.http.post(environment.apiUrl + '/api/contact', {
       name: this.name,
       email: this.email,
       subject: this.subject,
