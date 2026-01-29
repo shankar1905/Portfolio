@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path"); // ✅ FIX
 
 const app = express();
 
@@ -17,15 +18,18 @@ app.use(cors({
 
 app.use(express.json());
 
-// ✅ Routes
+// ✅ API Routes
 app.use("/api/contact", require("./routes/contact.routes"));
 app.use("/api/visitor", require("./routes/visitor.routes"));
 app.use("/api/admin", require("./routes/admin.routes"));
 
-app.use(express.static(path.join(__dirname, "../frontend/dist/frontend")));
+// ✅ Angular Frontend (Render Hosting)
+const frontendPath = path.join(__dirname, "../frontend/dist/frontend");
+app.use(express.static(frontendPath));
 
+// ✅ Angular SPA fallback
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/frontend/index.html"));
+    res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // ✅ MongoDB Connection
@@ -35,7 +39,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 // ✅ Render Port
 const PORT = process.env.PORT || 5001;
-
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
