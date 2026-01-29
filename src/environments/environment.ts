@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://shankar-portfolio-9tn5.onrender.com'
+  apiUrl: "https://api.shankarganesh.in"
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
