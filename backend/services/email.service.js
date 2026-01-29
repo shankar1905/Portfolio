@@ -2,7 +2,7 @@ const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = `Shankar Portfolio <contact@${process.env.DOMAIN_EMAIL}>`;
+const FROM_EMAIL = `Shankar Portfolio <${process.env.DOMAIN_EMAIL}>`;
 const ADMIN_EMAIL = process.env.EMAIL;
 
 // ✅ Admin Notification Email
