@@ -5,7 +5,14 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors());
+const cors = require("cors");
+
+app.use(cors({
+    origin: [
+        "https://shankarganesh.in",
+        "http://localhost:4201"
+    ]
+}));
 app.use(express.json());
 
 // ✅ Routes
@@ -23,8 +30,10 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.error("❌ MongoDB Error:", err.message));
 
 // ✅ Render Port
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 10000;
+
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
+
 
