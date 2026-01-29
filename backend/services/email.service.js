@@ -2,17 +2,11 @@ const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ✅ Email Validation
-function isValidEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
 // ✅ Admin Email
 async function sendContactEmail(name, email, message) {
   try {
     const result = await resend.emails.send({
-      from: "Portfolio <onboarding@resend.dev>",
+      from: `Portfolio <${process.env.FROM_EMAIL}>`,
       to: process.env.EMAIL,
       subject: "📩 New Portfolio Contact Message",
       html: `
@@ -29,24 +23,21 @@ async function sendContactEmail(name, email, message) {
   }
 }
 
-// ✅ Auto Reply (with protection)
+// ✅ Auto Reply Email (REAL USERS)
 async function sendAutoReplyEmail(name, email) {
   try {
-    if (!isValidEmail(email)) {
-      console.log("⚠️ Invalid email, auto reply blocked:", email);
-      return;
-    }
-
     const result = await resend.emails.send({
-      from: "Shankar Portfolio <onboarding@resend.dev>",
+      from: `Shankar Portfolio <${process.env.FROM_EMAIL}>`,
       to: email,
       subject: "✅ Thanks for contacting me!",
       html: `
-        <h3>Hi ${name} 👋</h3>
-        <p>Thanks for contacting me.</p>
-        <p>I received your message and will reply soon 🚀</p>
-        <br>
-        <p>Regards,<br><b>Shankar Ganesh</b></p>
+        <div style="font-family:Arial;padding:15px">
+          <h2>Hi ${name} 👋</h2>
+          <p>Thank you for contacting me.</p>
+          <p>I received your message and will reply soon 🚀</p>
+          <br>
+          <p>Regards,<br><b>Shankar Ganesh</b></p>
+        </div>
       `,
     });
 
