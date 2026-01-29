@@ -8,7 +8,7 @@ const app = express();
 // ✅ CORS (local + live domain)
 app.use(cors({
     origin: [
-        "http://localhost:4200",
+        "http://localhost:4201",
         "https://shankarganesh.in",
         "https://www.shankarganesh.in"
     ],
@@ -22,9 +22,10 @@ app.use("/api/contact", require("./routes/contact.routes"));
 app.use("/api/visitor", require("./routes/visitor.routes"));
 app.use("/api/admin", require("./routes/admin.routes"));
 
-// ✅ Root API Test
-app.get("/", (req, res) => {
-    res.send("🚀 Shankar Portfolio Backend Running!");
+app.use(express.static(path.join(__dirname, "../frontend/dist/frontend")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/frontend/index.html"));
 });
 
 // ✅ MongoDB Connection
