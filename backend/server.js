@@ -2,11 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path"); // ✅ FIX
+const path = require("path");
 
 const app = express();
 
-// ✅ CORS (local + live domain)
+// ✅ CORS
 app.use(cors({
     origin: [
         "http://localhost:4201",
@@ -23,16 +23,16 @@ app.use("/api/contact", require("./routes/contact.routes"));
 app.use("/api/visitor", require("./routes/visitor.routes"));
 app.use("/api/admin", require("./routes/admin.routes"));
 
-// ✅ Angular Frontend (Render Hosting)
+// ✅ Angular Build Path
 const frontendPath = path.join(__dirname, "../frontend/dist/frontend");
 app.use(express.static(frontendPath));
 
-// ✅ Angular SPA fallback
-app.get("*", (req, res) => {
+// ✅ SPA Fallback (FIXED ✅)
+app.use((req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
 });
 
-// ✅ MongoDB Connection
+// ✅ MongoDB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ MongoDB Connected"))
     .catch(err => console.error("❌ MongoDB Error:", err.message));
