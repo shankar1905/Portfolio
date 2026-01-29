@@ -7,19 +7,18 @@ router.post("/", async (req, res) => {
     try {
         const { name, email, message } = req.body;
 
-        // Save to MongoDB
         const contact = new Contact({ name, email, message });
         await contact.save();
 
-        // Send Emails
         await sendContactEmail(name, email, message);
-        await sendAutoReplyEmail(name, email);
+        await sendAutoReplyEmail(name, email); // even if fails, admin mail works
 
         res.json({ message: "Message sent successfully ✅" });
     } catch (err) {
         console.error("❌ Contact Error:", err);
-        res.status(500).json({ error: "Email sending failed ❌" });
+        res.status(500).json({ error: err.message });
     }
 });
+
 
 module.exports = router;
