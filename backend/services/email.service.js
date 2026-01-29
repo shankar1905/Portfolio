@@ -2,7 +2,13 @@ const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ✅ Admin Email (Always Works)
+// ✅ Email Validation
+function isValidEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+// ✅ Admin Email
 async function sendContactEmail(name, email, message) {
   try {
     const result = await resend.emails.send({
@@ -23,9 +29,14 @@ async function sendContactEmail(name, email, message) {
   }
 }
 
-// ✅ Auto Reply Email (Free Plan Fix)
+// ✅ Auto Reply (with protection)
 async function sendAutoReplyEmail(name, email) {
   try {
+    if (!isValidEmail(email)) {
+      console.log("⚠️ Invalid email, auto reply blocked:", email);
+      return;
+    }
+
     const result = await resend.emails.send({
       from: "Shankar Portfolio <onboarding@resend.dev>",
       to: email,
