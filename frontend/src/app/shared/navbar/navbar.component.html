@@ -1,0 +1,40 @@
+<nav class="navbar">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand">Shankar Ganesh</a>
+
+        <ul class="navbar-nav" [class.show]="menuOpen">
+            <li class="nav-item"><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a routerLink="/about" routerLinkActive="active" class="nav-link">About</a></li>
+            <li class="nav-item"><a routerLink="/skills" routerLinkActive="active" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a routerLink="/projects" routerLinkActive="active" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a routerLink="/experience" routerLinkActive="active" class="nav-link">Experience</a></li>
+            <li class="nav-item"><a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a></li>
+            
+            <div class="navbar-actions-mobile">
+                <button class="theme-toggle" (click)="toggleTheme()" [title]="isLightMode ? 'Switch to Dark Mode' : 'Switch to Light Mode'">
+                    <span [hidden]="isLightMode">☀️</span>
+                    <span [hidden]="!isLightMode">🌙</span>
+                </button>
+                
+                <button class="btn" routerLink="/contact">
+                    Hire Me
+                </button>
+            </div>
+        </ul>
+
+        <div class="navbar-actions">
+            <button class="theme-toggle" (click)="toggleTheme()" [title]="isLightMode ? 'Switch to Dark Mode' : 'Switch to Light Mode'">
+                <span [hidden]="isLightMode">☀️</span>
+                <span [hidden]="!isLightMode">🌙</span>
+            </button>
+            
+            <button class="btn" routerLink="/contact">
+                Hire Me
+            </button>
+        </div>
+
+        <button class="navbar-toggler" (click)="toggleMenu()">
+            ☰
+        </button>
+    </div>
+</nav>

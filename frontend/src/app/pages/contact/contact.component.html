@@ -1,0 +1,56 @@
+<div class="container contact-section">
+    <h2 class="section-title">Get In Touch 📩</h2>
+
+    <div class="contact-container">
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <div class="contact-info-item">
+                <div class="icon">📧</div>
+                <h4>Email</h4>
+                <p>shankarganesh1905&#64;gmail.com</p>
+            </div>
+            <div class="contact-info-item">
+                <div class="icon">📱</div>
+                <h4>Phone</h4>
+                <p>Available on request</p>
+            </div>
+            <div class="contact-info-item">
+                <div class="icon">📍</div>
+                <h4>Location</h4>
+                <p>India</p>
+            </div>
+            <div class="contact-info-item">
+                <div class="icon">💼</div>
+                <h4>LinkedIn</h4>
+                <p><a href="https://www.linkedin.com/in/shankar-ganesh-72189a218/" target="_blank" style="color: var(--neon-blue); text-decoration: none;">View Profile</a></p>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name" [(ngModel)]="name">
+            </div>
+
+            <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" class="form-control" placeholder="Enter your email" [(ngModel)]="email">
+            </div>
+
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" class="form-control" placeholder="What's this about?" [(ngModel)]="subject">
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea class="form-control" placeholder="Your message..." [(ngModel)]="message"></textarea>
+            </div>
+
+            <button class="submit-btn" (click)="sendMessage()">
+                📤 Send Message
+            </button>
+        </div>
+    </div>
+</div>
